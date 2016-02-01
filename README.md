@@ -1,2 +1,2 @@
-# javaGlobantCourse
-Repository for the final project
+# javaGlobantCourseProject2
+Repository for the final project #2, a comic render system
