@@ -1,6 +1,6 @@
 package com.javaCourse.LucaSartori.models;
 
-public class Comic{
+public class Comic implements Comparable<Comic>{
 
 	private String name;
 	private String author;
@@ -58,6 +58,10 @@ public class Comic{
 
 	public void setCantCopies(int cantCopies) {
 		this.cantCopies = cantCopies;
+	}
+
+	public int compareTo(Comic arg0) {
+		return this.name.compareTo(arg0.name);
 	}
 
 }

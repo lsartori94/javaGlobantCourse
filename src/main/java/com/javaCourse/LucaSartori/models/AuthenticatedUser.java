@@ -1,11 +1,15 @@
 package com.javaCourse.LucaSartori.models;
 
-public class AuthenticatedUser {
+import com.javaCourse.LucaSartori.util.UserEnum;
+
+public class AuthenticatedUser extends User {
 
 	private String name;
 	private String password;
 	
 	public AuthenticatedUser(String name, String pass) {
+		super();
+		super.setType(UserEnum.AUTHENTICATED);
 		setName(name);
 		setPassword(pass);
 		System.out.println(printUser()+" created.");
