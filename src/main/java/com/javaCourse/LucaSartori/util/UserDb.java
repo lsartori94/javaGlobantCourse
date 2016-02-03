@@ -37,16 +37,16 @@ public class UserDb {
 		}
 	}
 	
-	public boolean removeUser(AuthenticatedUser toRemove) {
-		try {
-			users.remove(toRemove);
-			System.out.println("User removed");
-			return true;
+	public boolean removeUser(String toRemove) {
+		for (AuthenticatedUser user : users) {
+			if (user.getName().compareTo(toRemove) == 0) {
+				users.remove(user);
+				System.out.println("User Removed");
+				return true;
+			}
 		}
-		catch (NullPointerException e) {
 			System.out.println("User does not exists");
 			return false;
-		}
 	}
 	
 	public AuthenticatedUser getUser(String name) {
@@ -57,4 +57,5 @@ public class UserDb {
 		}
 		return null;
 	}
+	
 }
