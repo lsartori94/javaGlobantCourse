@@ -337,7 +337,21 @@ public class Controller {
 	}
 	
 	private void addComic() {
-		
+		System.out.println("CAMPS WITH '*' ARE MANDATORY");
+		System.out.println(" ");
+		Scanner in = new Scanner(System.in);
+		System.out.println("*TITLE= ");
+		String name = in.next();
+		System.out.println("*AUTHOR= ");
+		String author = in.next();
+		System.out.println("YEAR= ");
+		int year = in.nextInt();
+		System.out.println("ISSUE NUMBER= ");
+		int issueNum = in.nextInt();
+		System.out.println("*GENRE= ");
+		String genre = in.next();
+		Comic toAdd = new Comic(name, author, genre, year, issueNum);
+		comicDb.addComic(toAdd);
 	}
 	
 	private void removeComic() {

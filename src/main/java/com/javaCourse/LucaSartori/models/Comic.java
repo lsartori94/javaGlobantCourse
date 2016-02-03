@@ -13,6 +13,7 @@ public class Comic implements Comparable<Comic>{
 		setName(name);
 		setAuthor(author);
 		setGenre(genre);
+		setCantCopies(1);
 	}
 	
 	public Comic(String name, String author, String genre, int year, int issueNumber) {
@@ -21,6 +22,7 @@ public class Comic implements Comparable<Comic>{
 		setGenre(genre);
 		setYear(year);
 		setIssueNumber(issueNumber);
+		setCantCopies(1);
 	}
 
 	public String getName() {
