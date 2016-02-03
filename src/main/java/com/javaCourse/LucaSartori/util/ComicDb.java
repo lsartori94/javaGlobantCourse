@@ -13,7 +13,7 @@ public class ComicDb {
 	private static ComicDb instance = null;
 	private Map<String, Comic> comics = new HashMap<String, Comic>();
 	
-	protected ComicDb() {
+	private ComicDb() {
 		// not used, singleton class
 	}
 	
@@ -102,6 +102,14 @@ public class ComicDb {
 			}
 		}
 		return comicsOut;
+	}
+	
+	public void printComics() {
+		for (Map.Entry<String, Comic> comic : comics.entrySet()) {
+			comic.getValue().print();
+			System.out.println(" ");
+			System.out.println(" ");
+		}
 	}
 	
 }

@@ -53,4 +53,12 @@ public class GenreDb {
 		}
 		return null;
 	}
+	
+	public void print() {
+		for (Genre genre : genres) {
+			genre.print();
+			System.out.println(" ");
+		}
+	}
+	
 }

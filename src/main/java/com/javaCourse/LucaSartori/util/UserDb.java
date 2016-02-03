@@ -15,7 +15,7 @@ public class UserDb {
 	private static UserDb instance = null;
 	private Set<AuthenticatedUser> users = new HashSet<AuthenticatedUser>();
 	
-	protected UserDb() {
+	private UserDb() {
 		// not used, singleton class
 	}
 	
@@ -59,4 +59,9 @@ public class UserDb {
 		return null;
 	}
 	
+	public void print() {
+		for (AuthenticatedUser authenticatedUser : users) {
+			authenticatedUser.printUser();
+		}
+	}
 }
