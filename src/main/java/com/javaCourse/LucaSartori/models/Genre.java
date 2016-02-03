@@ -56,4 +56,5 @@ public class Genre {
 			System.out.println("Comic does not exist in this genre");
 		}
 	}
+	
 }

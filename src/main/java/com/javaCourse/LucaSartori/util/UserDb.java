@@ -3,30 +3,29 @@ package com.javaCourse.LucaSartori.util;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.javaCourse.LucaSartori.models.User;
-
+import com.javaCourse.LucaSartori.models.AuthenticatedUser;
 
 /*
  * Singleton Set.
  * Contains a TreeSet of User
  */
-public class UserSet {
+public class UserDb {
 	
-	private static UserSet instance = null;
-	private Set<User> users = new TreeSet<User>();
+	private static UserDb instance = null;
+	private Set<AuthenticatedUser> users = new TreeSet<AuthenticatedUser>();
 	
-	protected UserSet() {
+	protected UserDb() {
 		// not used, singleton class
 	}
 	
-	public static UserSet getInstance() {
+	public static UserDb getInstance() {
 		if (instance == null) {
-			instance = new UserSet();
+			instance = new UserDb();
 		}
 		return instance;
 	}
 	
-	public boolean addUser(User toAdd) {
+	public boolean addUser(AuthenticatedUser toAdd) {
 		if (users.contains(toAdd)) {
 			System.out.println("User Already Exists");
 			return false;
@@ -38,7 +37,7 @@ public class UserSet {
 		}
 	}
 	
-	public boolean removeUser(User toRemove) {
+	public boolean removeUser(AuthenticatedUser toRemove) {
 		try {
 			users.remove(toRemove);
 			System.out.println("User removed");
@@ -48,5 +47,14 @@ public class UserSet {
 			System.out.println("User does not exists");
 			return false;
 		}
+	}
+	
+	public AuthenticatedUser getUser(String name) {
+		for (AuthenticatedUser user : users) {
+			if (user.getName().compareTo(name) == 0) {
+				return user;
+			}
+		}
+		return null;
 	}
 }

@@ -7,15 +7,18 @@ public class Comic implements Comparable<Comic>{
 	private int year;
 	private int issueNumber;
 	private int cantCopies;
+	private String Genre;
 	
-	public Comic(String name, String author) {
+	public Comic(String name, String author, String genre) {
 		setName(name);
 		setAuthor(author);
+		setGenre(genre);
 	}
 	
-	public Comic(String name, String author, int year, int issueNumber) {
+	public Comic(String name, String author, String genre, int year, int issueNumber) {
 		setAuthor(author);
 		setName(name);
+		setGenre(genre);
 		setYear(year);
 		setIssueNumber(issueNumber);
 	}
@@ -62,6 +65,14 @@ public class Comic implements Comparable<Comic>{
 
 	public int compareTo(Comic arg0) {
 		return this.name.compareTo(arg0.name);
+	}
+
+	public String getGenre() {
+		return Genre;
+	}
+
+	public void setGenre(String genre) {
+		Genre = genre;
 	}
 
 }
