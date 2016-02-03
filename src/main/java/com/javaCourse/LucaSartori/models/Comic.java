@@ -7,7 +7,7 @@ public class Comic implements Comparable<Comic>{
 	private int year;
 	private int issueNumber;
 	private int cantCopies;
-	private String Genre;
+	private String genre;
 	
 	public Comic(String name, String author, String genre) {
 		setName(name);
@@ -68,11 +68,22 @@ public class Comic implements Comparable<Comic>{
 	}
 
 	public String getGenre() {
-		return Genre;
+		return genre;
 	}
 
 	public void setGenre(String genre) {
-		Genre = genre;
+		this.genre = genre;
+	}
+	
+	public void print() {
+		System.out.println("------------------------------------------------------");
+		System.out.println("--------    TITLE= "+name);
+		System.out.println("--------    Author= "+author);
+		System.out.println("--------    YEAR= "+year);
+		System.out.println("--------    ISSUE NUMBER= ");
+		System.out.println("--------    AVAILABILITY= ");
+		System.out.println("--------    GENRE= "+genre);
+		System.out.println("------------------------------------------------------");
 	}
 
 }

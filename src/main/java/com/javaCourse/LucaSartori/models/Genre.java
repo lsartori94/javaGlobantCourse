@@ -57,4 +57,12 @@ public class Genre {
 		}
 	}
 	
+	public void print() {
+		System.out.println(" ");
+		System.out.println("------------------------------------------------------");
+		System.out.println("--------    NAME= "+name);
+		System.out.println("--------    # COMICS= "+cantComics);
+		System.out.println("------------------------------------------------------");
+	}
+	
 }
