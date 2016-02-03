@@ -10,6 +10,10 @@ public class AdminMenu extends UserMenu {
 		super.addItem("8. Remove Comic");
 		super.addItem("9. Add Genre");
 		super.addItem("10. Remove Genre");
+		super.addItem("11. List Users");
+		super.addItem("12. Add User");
+		super.addItem("13. Remove User");
+		super.addItem("1000. Log Out");
 	}
 	
 }
