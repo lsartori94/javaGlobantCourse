@@ -4,7 +4,6 @@ public class AuthenticatedUserMenu extends UserMenu {
 
 	public AuthenticatedUserMenu() {
 		super();
-		super.removeItem("3. Login");
-		super.addItem("3. Request Loan");
+		super.addItem("4. Request Loan");
 	}
 }

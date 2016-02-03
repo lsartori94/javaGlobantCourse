@@ -1,14 +1,14 @@
 package com.javaCourse.LucaSartori.util;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.javaCourse.LucaSartori.models.Genre;
 
 public class GenreDb {
 
 	private static GenreDb instance = null;
-	private Set<Genre> genres = new TreeSet<Genre>();
+	private Set<Genre> genres = new HashSet<Genre>();
 	
 	private GenreDb() {
 		// empty, singleton class

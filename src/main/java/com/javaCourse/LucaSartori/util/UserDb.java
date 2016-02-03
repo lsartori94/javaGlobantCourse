@@ -1,7 +1,8 @@
 package com.javaCourse.LucaSartori.util;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 import com.javaCourse.LucaSartori.models.AuthenticatedUser;
 
@@ -12,7 +13,7 @@ import com.javaCourse.LucaSartori.models.AuthenticatedUser;
 public class UserDb {
 	
 	private static UserDb instance = null;
-	private Set<AuthenticatedUser> users = new TreeSet<AuthenticatedUser>();
+	private Set<AuthenticatedUser> users = new HashSet<AuthenticatedUser>();
 	
 	protected UserDb() {
 		// not used, singleton class
