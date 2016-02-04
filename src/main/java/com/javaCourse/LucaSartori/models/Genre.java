@@ -65,4 +65,11 @@ public class Genre {
 		System.out.println("------------------------------------------------------");
 	}
 	
+	public void printComics() {
+		System.out.println("##############       COMIC LIST       ################");
+		for (Comic comic : comics) {
+			comic.print();
+		}
+	}
+	
 }

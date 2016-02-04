@@ -4,16 +4,18 @@ public class Comic implements Comparable<Comic>{
 
 	private String name;
 	private String author;
-	private int year;
-	private int issueNumber;
-	private int cantCopies;
+	private int year = 0000;
+	private int issueNumber = 0000;
+	private int cantCopies = 0;
 	private String genre;
+	private int toRender;
 	
 	public Comic(String name, String author, String genre) {
 		setName(name);
 		setAuthor(author);
 		setGenre(genre);
 		setCantCopies(1);
+		setToRender(getCantCopies());
 	}
 	
 	public Comic(String name, String author, String genre, int year, int issueNumber) {
@@ -23,6 +25,7 @@ public class Comic implements Comparable<Comic>{
 		setYear(year);
 		setIssueNumber(issueNumber);
 		setCantCopies(1);
+		setToRender(getCantCopies());
 	}
 
 	public String getName() {
@@ -77,14 +80,24 @@ public class Comic implements Comparable<Comic>{
 		this.genre = genre;
 	}
 	
+	
+	public int getToRender() {
+		return toRender;
+	}
+
+	public void setToRender(int rendered) {
+		this.toRender = rendered;
+	}
+
 	public void print() {
 		System.out.println("------------------------------------------------------");
 		System.out.println("--------    TITLE= "+name);
 		System.out.println("--------    Author= "+author);
 		System.out.println("--------    YEAR= "+year);
-		System.out.println("--------    ISSUE NUMBER= ");
-		System.out.println("--------    AVAILABILITY= ");
+		System.out.println("--------    ISSUE NUMBER= "+issueNumber);
+		System.out.println("--------    COPIES= "+cantCopies);
 		System.out.println("--------    GENRE= "+genre);
+		System.out.println("--------    AVAILABLE COPIES= "+toRender);
 		System.out.println("------------------------------------------------------");
 	}
 
