@@ -12,7 +12,7 @@ public class AuthenticatedUser extends User {
 		super.setType(UserEnum.AUTHENTICATED);
 		setName(name);
 		setPassword(pass);
-		System.out.println(printUser()+" created.");
+		System.out.println(getName()+" created.");
 	}
 
 	public String getName() {
@@ -31,8 +31,8 @@ public class AuthenticatedUser extends User {
 		this.password = password;
 	}
 	
-	public String printUser() {
-		return "Name: "+getName();
+	public void printUser() {
+		System.out.println("Name: "+getName()+" ("+getType()+")");
 	}
 	
 }
