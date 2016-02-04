@@ -159,7 +159,7 @@ public class Controller {
 			case 10:
 				System.out.println("##############       ADD GENRE        ################");
 				System.out.println(" ");
-				addGenre();
+				addGenre(null);
 				break;
 					
 			// Remove Genre
@@ -498,15 +498,16 @@ public class Controller {
 				System.out.println(" ");
 				Scanner in = new Scanner(System.in);
 				System.out.println("*TITLE= ");
-				String name = in.next().toUpperCase();
+				String name = in.nextLine().toUpperCase();
 				System.out.println("*AUTHOR= ");
-				String author = in.next().toUpperCase();
-				System.out.println("YEAR= ");
+				String author = in.nextLine().toUpperCase();
+				System.out.println("*YEAR= ");
 				int year = in.nextInt();
-				System.out.println("ISSUE NUMBER= ");
+				System.out.println("*ISSUE NUMBER= ");
 				int issueNum = in.nextInt();
 				System.out.println("*GENRE= ");
-				String genre = in.next().toUpperCase();
+				String genre = in.nextLine().toUpperCase();
+				genre = in.nextLine().toUpperCase();
 				Comic toAdd = new Comic(name, author, genre, year, issueNum);
 				System.out.println(" ");
 				System.out.println("Do you want to add more copies of this comic? y/n");
@@ -523,7 +524,7 @@ public class Controller {
 					System.out.println("Genre does not exists. Create? y/n");
 					String choise = in.next().toUpperCase();
 					if (choise.compareTo("Y") == 0) {
-						addGenre();
+						addGenre(genre);
 						// Update genre database
 						genreDb.getGenre(genre).addComic(toAdd);
 						genreDb.getGenre(genre).setCantComics(genreDb.getGenre(genre).getCantComics()+1);
@@ -575,28 +576,34 @@ public class Controller {
 		}
 	}
 	
-	private void addGenre() {
-		Scanner in = new Scanner(System.in);
+	private void addGenre(String gen) {
+		Scanner input = new Scanner(System.in);
 		boolean loop = true;
-		while (loop) {
-			try {
-				System.out.println("Enter Genre to Add: ");
-				String genre = in.next().toUpperCase();
-				Genre toAdd = new Genre(genre);
-				if (!genreDb.addGenre(toAdd)) {
-					System.out.println(" ");
-					System.out.println("Genre could not be added. Do you want to try again? y/n");
-					String choise = in.next().toUpperCase();
-					if (choise.compareTo("Y") != 0) {
+		if (gen != null) {
+			Genre add = new Genre(gen);
+			genreDb.addGenre(add);
+		}
+		else {
+			while (loop) {
+				try {
+					System.out.println("Enter Genre to Add: ");
+					String genre = input.nextLine().toUpperCase();
+					Genre toAdd = new Genre(genre);
+					if (!genreDb.addGenre(toAdd)) {
+						System.out.println(" ");
+						System.out.println("Genre could not be added. Do you want to try again? y/n");
+						String choise = input.next().toUpperCase();
+						if (choise.compareTo("Y") != 0) {
+							loop = false;
+						}
+					}
+					else {
 						loop = false;
 					}
+				} catch (InputMismatchException e) {
+					System.out.println("Please enter a name for the Genre");
+					System.out.println(" ");
 				}
-				else {
-					loop = false;
-				}
-			} catch (InputMismatchException e) {
-				System.out.println("Please enter a name for the Genre");
-				System.out.println(" ");
 			}
 		}
 	}
