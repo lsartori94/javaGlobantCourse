@@ -37,8 +37,8 @@ public class LoansDb {
 	public boolean removeLoan(int idToKill) {
 		for (Loan loan : loans) {
 			if (loan.getId() == idToKill) {
+				loan.print();
 				loans.remove(loan);
-				System.out.println("Loan Rejected");
 				return true;
 			}
 		}
@@ -53,6 +53,15 @@ public class LoansDb {
 			}
 		}
 		return null;
+	}
+	
+	public boolean userHasLoan(String user) {
+		for (Loan loan : loans) {
+			if (loan.getUser().getName().compareTo(user) == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void print() {
