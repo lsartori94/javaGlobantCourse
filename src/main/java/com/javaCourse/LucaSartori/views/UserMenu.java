@@ -9,7 +9,8 @@ public class UserMenu {
 		options.add("0. Exit");
 		options.add("1. List Comics");
 		options.add("2. List Genres");
-		options.add("3. Login");
+		options.add("3. Comics by Genre");
+		options.add("4. Login");
 	}
 	
 	public void print() {
