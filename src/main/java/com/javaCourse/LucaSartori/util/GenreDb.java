@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.javaCourse.LucaSartori.models.Genre;
-import com.javaCourse.LucaSartori.models.Loan;
 
 public class GenreDb {
 

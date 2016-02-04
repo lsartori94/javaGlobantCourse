@@ -57,8 +57,9 @@ public class ComicDb {
 			if (comics.get(toRemove).getCantCopies() > 1) {
 				System.out.println("Comic has more than 1 copy. Remove All? y/n");
 				boolean prompt = true;
+				Scanner confirm = new Scanner(System.in);
 				while (prompt) {
-					try (Scanner confirm = new Scanner(System.in)) {
+					try {
 						String c = confirm.next().toUpperCase();
 						if (c.compareTo("Y") == 0) {
 							comics.remove(toRemove);
@@ -72,7 +73,6 @@ public class ComicDb {
 						}
 					}
 					catch (Exception e) {
-						e.printStackTrace();
 						System.out.println("Invalid Input");
 					}
 				}
