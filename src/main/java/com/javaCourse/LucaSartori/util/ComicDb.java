@@ -51,17 +51,17 @@ public class ComicDb {
 		}
 	}
 	
-	public boolean removeComic(Comic toRemove) {
+	public boolean removeComic(String toRemove) {
 		boolean ret = false;
-		if (comics.get(toRemove.getName()) != null) {
-			if (comics.get(toRemove.getName()).getCantCopies() > 1) {
+		if (comics.get(toRemove) != null) {
+			if (comics.get(toRemove).getCantCopies() > 1) {
 				System.out.println("Comic has more than 1 copy. Remove All? y/n");
 				boolean prompt = true;
 				while (prompt) {
 					try (Scanner confirm = new Scanner(System.in)) {
 						String c = confirm.next().toUpperCase();
 						if (c.compareTo("Y") == 0) {
-							comics.remove(toRemove.getName());
+							comics.remove(toRemove);
 							System.out.println("Comic and copies removed");
 							prompt = false;
 							ret = true;
@@ -78,7 +78,7 @@ public class ComicDb {
 				}
 			}
 			else {
-				comics.remove(toRemove.getName());
+				comics.remove(toRemove);
 				System.out.println("Comic removed");
 				ret = true;
 			}
@@ -105,10 +105,14 @@ public class ComicDb {
 	}
 	
 	public void printComics() {
-		for (Map.Entry<String, Comic> comic : comics.entrySet()) {
-			comic.getValue().print();
-			System.out.println(" ");
-			System.out.println(" ");
+		if (!comics.isEmpty()) {
+			for (Map.Entry<String, Comic> comic : comics.entrySet()) {
+				comic.getValue().print();
+				System.out.println(" ");
+			}
+		}
+		else {
+			System.out.println("There are not any Comics");
 		}
 	}
 	

@@ -60,8 +60,13 @@ public class UserDb {
 	}
 	
 	public void print() {
-		for (AuthenticatedUser authenticatedUser : users) {
-			authenticatedUser.printUser();
+		if (!users.isEmpty()) {
+			for (AuthenticatedUser authenticatedUser : users) {
+				authenticatedUser.printUser();
+			}
+		}
+		else {
+			System.out.println("There are not any users");
 		}
 	}
 }

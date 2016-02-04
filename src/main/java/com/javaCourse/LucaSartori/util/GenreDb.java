@@ -55,9 +55,14 @@ public class GenreDb {
 	}
 	
 	public void print() {
-		for (Genre genre : genres) {
-			genre.print();
-			System.out.println(" ");
+		if (!genres.isEmpty()) {
+			for (Genre genre : genres) {
+				genre.print();
+				System.out.println(" ");
+			}
+		}
+		else {
+			System.out.println("There are not any Genres");
 		}
 	}
 	
