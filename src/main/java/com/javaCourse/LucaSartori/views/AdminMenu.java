@@ -6,7 +6,7 @@ public class AdminMenu extends UserMenu {
 		super();
 		super.addItem("5. List Loans");
 		super.addItem("6. Approve Loan");
-		super.addItem("7. Reject Loan");
+		super.addItem("7. Reject/Delete Loan");
 		super.addItem("8. Add Comic");
 		super.addItem("9. Remove Comic");
 		super.addItem("10. Add Genre");
