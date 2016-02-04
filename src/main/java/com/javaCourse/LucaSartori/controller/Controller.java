@@ -314,12 +314,12 @@ public class Controller {
 		}
 	}
 
-	private void listComics() {
-		comicDb.printComics();
+	private boolean listComics() {
+		return comicDb.printComics();
 	}
 	
-	private void listGenres() {
-		genreDb.print();
+	private boolean listGenres() {
+		return genreDb.print();
 	}
 	
 	private void comicsByGenre() {
@@ -413,14 +413,15 @@ public class Controller {
 		}
 	}
 	
-	private void listLoans() {
-		loanDb.print();
+	private boolean listLoans() {
+		return loanDb.print();
 	}
 	
 	private void approveLoan() {
 		boolean loop = true;
 		while (loop) {
 			try {
+				listLoans();
 				Scanner in = new Scanner(System.in);
 				System.out.println("Enter a Loan ID: ");
 				int id = in.nextInt();
@@ -456,27 +457,32 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
-				Scanner in = new Scanner(System.in);
-				System.out.println("Enter a Loan ID: ");
-				int id = in.nextInt();
-				Loan toRem = loanDb.getLoan(id);
-				// Loan found
-				if (toRem != null) {
-					loanDb.removeLoan(toRem.getId());
-					Comic cdb = comicDb.getComic(toRem.getComic().getName());
-					if (cdb.getCantCopies() <= cdb.getToRender()+1) {
-						cdb.setToRender(cdb.getToRender()+1);
-						System.out.println("LOAN REJECTED");
-					}
-					loop = false;
-				}
-				else {
-					System.out.println("Loan does not exists. Try again? y/n");
-					String choise = in.nextLine().toUpperCase();
-					// No
-					if (choise.compareTo("Y") != 0) {
+				if (listLoans()) {
+					Scanner in = new Scanner(System.in);
+					System.out.println("Enter a Loan ID: ");
+					int id = in.nextInt();
+					Loan toRem = loanDb.getLoan(id);
+					// Loan found
+					if (toRem != null) {
+						loanDb.removeLoan(toRem.getId());
+						Comic cdb = comicDb.getComic(toRem.getComic().getName());
+						if (cdb.getCantCopies() <= cdb.getToRender()+1) {
+							cdb.setToRender(cdb.getToRender()+1);
+							System.out.println("LOAN REJECTED");
+						}
 						loop = false;
 					}
+					else {
+						System.out.println("Loan does not exists. Try again? y/n");
+						String choise = in.nextLine().toUpperCase();
+						// No
+						if (choise.compareTo("Y") != 0) {
+							loop = false;
+						}
+					}
+				}
+				else {
+					loop = false;
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a Loan ID");
@@ -541,13 +547,21 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
-				System.out.println("Enter a Comic name to delete: ");
-				String toKill = inData.nextLine().toUpperCase();
-				if (!comicDb.removeComic(toKill)) {
-					System.out.println(" ");
-					System.out.println("Do you want to try again? y/n");
-					String choise = inData.nextLine().toUpperCase();
-					if (choise.compareTo("Y") != 0) {
+				if (listComics()) {
+					System.out.println("Enter a Comic name to delete: ");
+					String toKill = inData.nextLine().toUpperCase();
+					// Delete comic from Genre Database
+					genreDb.getGenre(comicDb.getComic(toKill).getGenre()).setCantComics(genreDb.getGenre(comicDb.getComic(toKill).getGenre()).getCantComics()-1);
+					genreDb.getGenre(comicDb.getComic(toKill).getGenre()).getComics().remove(comicDb.getComic(toKill));
+					if (!comicDb.removeComic(toKill)) {
+						System.out.println(" ");
+						System.out.println("Do you want to try again? y/n");
+						String choise = inData.nextLine().toUpperCase();
+						if (choise.compareTo("Y") != 0) {
+							loop = false;
+						}
+					}
+					else {
 						loop = false;
 					}
 				}
@@ -592,18 +606,26 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
-				System.out.println("Enter a Genre name to delete: ");
-				String toKill = inData.nextLine().toUpperCase();
-				if (!genreDb.removeGenre(toKill)) {
-					System.out.println(" ");
-					System.out.println("Do you want to try again? y/n");
-					String choise = inData.nextLine().toUpperCase();
-					if (choise.compareTo("Y") != 0) {
-						loop = false;
+				if (listGenres()) {
+					System.out.println("Enter a Genre name to delete: ");
+					String toKill = inData.nextLine().toUpperCase();
+					if (!genreDb.genreHasComics()) {
+						if (!genreDb.removeGenre(toKill)) {
+							System.out.println(" ");
+							System.out.println("Do you want to try again? y/n");
+							String choise = inData.nextLine().toUpperCase();
+							if (choise.compareTo("Y") != 0) {
+								loop = false;
+							}
+						}
+						else {
+							loop = false;
+						}
 					}
-				}
-				else {
-					loop = false;
+					else {
+						System.out.println("Genre has Comics. First delete Comics.");
+						loop = false;	
+					}
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a name for the Genre");
@@ -612,8 +634,8 @@ public class Controller {
 		}
 	}
 	
-	private void listUsers() {
-		userDb.print();
+	private boolean listUsers() {
+		return userDb.print();
 	}
 	
 	private void addUser() {
@@ -649,24 +671,26 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
-				System.out.println("Enter a User name to delete: ");
-				String toKill = inData.nextLine().toUpperCase();
-				if (!loanDb.userHasLoan(toKill)) {
-					if (!userDb.removeUser(toKill)) {
-						System.out.println(" ");
-						System.out.println("Do you want to try again? y/n");
-						String choise = inData.nextLine().toUpperCase();
-						if (choise.compareTo("Y") != 0) {
+				if (listUsers()) {
+					System.out.println("Enter a User name to delete: ");
+					String toKill = inData.nextLine().toUpperCase();
+					if (!loanDb.userHasLoan(toKill)) {
+						if (!userDb.removeUser(toKill)) {
+							System.out.println(" ");
+							System.out.println("Do you want to try again? y/n");
+							String choise = inData.nextLine().toUpperCase();
+							if (choise.compareTo("Y") != 0) {
+								loop = false;
+							}
+						}
+						else {
 							loop = false;
 						}
 					}
 					else {
+						System.out.println("User has Loans. First delete Loans.");
 						loop = false;
 					}
-				}
-				else {
-					System.out.println("User has Loans. First delete Loans.");
-					loop = false;
 				}
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a name for the Genre");

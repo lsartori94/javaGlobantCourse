@@ -64,14 +64,16 @@ public class LoansDb {
 		return false;
 	}
 	
-	public void print() {
+	public boolean print() {
 		if (!loans.isEmpty()) {
 			for (Loan loan : loans) {
 				loan.print();
 			}
+			return true;
 		}
 		else {
 			System.out.println("There are not any Loans");
+			return false;
 		}
 	}
 }

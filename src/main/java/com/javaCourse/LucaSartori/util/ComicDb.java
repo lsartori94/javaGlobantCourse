@@ -104,15 +104,17 @@ public class ComicDb {
 		return comicsOut;
 	}
 	
-	public void printComics() {
+	public boolean printComics() {
 		if (!comics.isEmpty()) {
 			for (Map.Entry<String, Comic> comic : comics.entrySet()) {
 				comic.getValue().print();
 				System.out.println(" ");
 			}
+			return true;
 		}
 		else {
 			System.out.println("There are not any Comics");
+			return false;
 		}
 	}
 	

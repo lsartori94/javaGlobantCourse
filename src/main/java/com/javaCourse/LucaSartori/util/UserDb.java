@@ -59,14 +59,16 @@ public class UserDb {
 		return null;
 	}
 	
-	public void print() {
+	public boolean print() {
 		if (!users.isEmpty()) {
 			for (AuthenticatedUser authenticatedUser : users) {
 				authenticatedUser.printUser();
 			}
+			return true;
 		}
 		else {
 			System.out.println("There are not any users");
+			return false;
 		}
 	}
 }

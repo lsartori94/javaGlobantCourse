@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.javaCourse.LucaSartori.models.Genre;
+import com.javaCourse.LucaSartori.models.Loan;
 
 public class GenreDb {
 
@@ -54,16 +55,27 @@ public class GenreDb {
 		return null;
 	}
 	
-	public void print() {
+	public boolean print() {
 		if (!genres.isEmpty()) {
 			for (Genre genre : genres) {
 				genre.print();
 				System.out.println(" ");
 			}
+			return true;
 		}
 		else {
 			System.out.println("There are not any Genres");
+			return false;
 		}
+	}
+	
+	public boolean genreHasComics() {
+		for (Genre gen : genres) {
+			if (gen.getCantComics() > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
