@@ -27,13 +27,20 @@ public class ComicDb {
 	public boolean addComic(Comic toAdd) {
 		if (comics.containsKey(toAdd.getName())) {
 			System.out.println("Comic Already Exists");
-			System.out.println("Do you want to add a copy? y/n");
+			System.out.println("Do you want to add the copies? y/n");
 			boolean prompt = true;
+			@SuppressWarnings("resource")
+			Scanner confirm = new Scanner(System.in);
 			while (prompt) {
-				try (Scanner confirm = new Scanner(System.in)){
+				try {
 					String c = confirm.next().toUpperCase();
 					if (c.compareTo("Y") == 0) {
-						comics.get(toAdd.getName()).setCantCopies(comics.get(toAdd.getName()).getCantCopies()+1);
+						// Add to existing comic new copies
+						int copies = comics.get(toAdd.getName()).getCantCopies();
+						int copiesToAdd = toAdd.getCantCopies()+copies;
+						comics.get(toAdd.getName()).setCantCopies(copiesToAdd);
+						int toRender = comics.get(toAdd.getName()).getToRender();
+						comics.get(toAdd.getName()).setToRender(toRender+toAdd.getCantCopies());
 						System.out.println("Copy added");
 						prompt = false;
 					}
