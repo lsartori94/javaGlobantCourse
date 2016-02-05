@@ -36,16 +36,23 @@ public class Controller {
 		Admin adm = new Admin(userAdmin, passAdmin);
 		userDb.addUser(adm);
 		AuthenticatedUser auth = new AuthenticatedUser("LUCA", "asdf1234");
+		AuthenticatedUser auth2 = new AuthenticatedUser("FEDE", "flemita1");
 		userDb.addUser(auth);
+		userDb.addUser(auth2);
 		createSomeGenres();
 		createSomeComics();
 	}
 
 	private void createSomeGenres() {
 		Genre gen = new Genre("SUPERHERO");
+		Genre gen2 = new Genre("MOVIES");
+		Genre gen3 = new Genre("SCI-FI");
 		gen.setComics(comicDb.getGenre(gen.getName()));
+		gen2.setComics(comicDb.getGenre(gen2.getName()));
+		gen3.setComics(comicDb.getGenre(gen3.getName()));
 		genreDb.addGenre(gen);
-		
+		genreDb.addGenre(gen2);
+		genreDb.addGenre(gen3);	
 	}
 
 	private void createSomeComics() {
@@ -53,9 +60,13 @@ public class Controller {
 		comicDb.addComic(com);
 		Comic com2 = new Comic("IRON MAN", "MARVEL", "SUPERHERO", 1994, 002);
 		comicDb.addComic(com2);
+		Comic com3 = new Comic("STAR WARS", "MARVEL", "MOVIES", 2000, 004);
+		comicDb.addComic(com3);
 		genreDb.getGenre("SUPERHERO").addComic(com);
 		genreDb.getGenre("SUPERHERO").addComic(com2);
+		genreDb.getGenre("MOVIES").addComic(com3);
 		genreDb.getGenre("SUPERHERO").setCantComics(2);
+		genreDb.getGenre("MOVIES").setCantComics(1);
 	}
 
 	public void go() {
@@ -323,10 +334,12 @@ public class Controller {
 	}
 	
 	private void comicsByGenre() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
 		while (loop) {
 			try {
+				if (listGenres()) {
 				System.out.println("Enter a Genre: ");
 				String genre = in.next().toUpperCase();
 				Genre gen = genreDb.getGenre(genre);
@@ -346,6 +359,10 @@ public class Controller {
 						loop = false;
 					}
 				}
+				}
+				else {
+					loop = false;
+				}
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a Genre");
 				System.out.println(" ");
@@ -354,6 +371,7 @@ public class Controller {
 	}
 	
 	private void login() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.println("USERNAME=  ");
 		String usrName = in.nextLine().toUpperCase();
@@ -383,6 +401,7 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
+				@SuppressWarnings("resource")
 				Scanner in = new Scanner(System.in);
 				System.out.println("Enter a Comic Name: ");
 				String name = in.nextLine().toUpperCase();
@@ -421,7 +440,8 @@ public class Controller {
 		boolean loop = true;
 		while (loop) {
 			try {
-				listLoans();
+				if (listLoans()) {
+				@SuppressWarnings("resource")
 				Scanner in = new Scanner(System.in);
 				System.out.println("Enter a Loan ID: ");
 				int id = in.nextInt();
@@ -431,8 +451,7 @@ public class Controller {
 					Comic cdb = comicDb.getComic(toApp.getComic().getName());
 					if (cdb.getToRender() > 0) {
 						toApp.setStatus("APPROVED");
-						cdb.setToRender(cdb.getToRender()-1);;
-						toApp.getComic().setToRender(toApp.getComic().getToRender()-1);
+						cdb.setToRender(cdb.getToRender()-1);
 					}
 					else {
 						System.out.println("No more copies available to render");
@@ -447,6 +466,10 @@ public class Controller {
 						loop = false;
 					}
 				}
+			}
+			else {
+				loop = false;
+			}
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a Loan ID");
 			}
@@ -458,6 +481,7 @@ public class Controller {
 		while (loop) {
 			try {
 				if (listLoans()) {
+					@SuppressWarnings("resource")
 					Scanner in = new Scanner(System.in);
 					System.out.println("Enter a Loan ID: ");
 					int id = in.nextInt();
@@ -496,6 +520,7 @@ public class Controller {
 			try {
 				System.out.println("CAMPS WITH '*' ARE MANDATORY GENRE MUST EXIST IN THE DATABASE");
 				System.out.println(" ");
+				@SuppressWarnings("resource")
 				Scanner in = new Scanner(System.in);
 				System.out.println("*TITLE= ");
 				String name = in.nextLine().toUpperCase();
@@ -544,6 +569,7 @@ public class Controller {
 	}
 	
 	private void removeComic() {
+		@SuppressWarnings("resource")
 		Scanner inData = new Scanner(System.in);
 		boolean loop = true;
 		while (loop) {
@@ -577,6 +603,7 @@ public class Controller {
 	}
 	
 	private void addGenre(String gen) {
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		boolean loop = true;
 		if (gen != null) {
@@ -609,6 +636,7 @@ public class Controller {
 	}
 	
 	private void removeGenre() {
+		@SuppressWarnings("resource")
 		Scanner inData = new Scanner(System.in);
 		boolean loop = true;
 		while (loop) {
@@ -646,6 +674,7 @@ public class Controller {
 	}
 	
 	private void addUser() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		boolean loop = true;
 		while (loop) {
@@ -674,6 +703,7 @@ public class Controller {
 	}
 	
 	private void removeUser() {
+		@SuppressWarnings("resource")
 		Scanner inData = new Scanner(System.in);
 		boolean loop = true;
 		while (loop) {

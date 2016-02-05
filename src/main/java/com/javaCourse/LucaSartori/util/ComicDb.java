@@ -57,6 +57,7 @@ public class ComicDb {
 			if (comics.get(toRemove).getCantCopies() > 1) {
 				System.out.println("Comic has more than 1 copy. Remove All? y/n");
 				boolean prompt = true;
+				@SuppressWarnings("resource")
 				Scanner confirm = new Scanner(System.in);
 				while (prompt) {
 					try {
